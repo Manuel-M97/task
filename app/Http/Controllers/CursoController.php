@@ -9,7 +9,7 @@ class CursoController extends Controller
 {
     public function index(){
 
-        $cursos = Curso::paginate(10);
+        $cursos = Curso::orderBy('id', 'desc')->paginate(10);
 
 
         return view('cursos.index', compact('cursos'));
@@ -32,10 +32,15 @@ class CursoController extends Controller
         return redirect(route('cursos.show', $curso));
     }
 
-    public function show($id){
-
-        $curso = Curso::find($id);
-
+    public function show(Curso $curso){
         return view('cursos.show', compact('curso'));
+    }
+
+    public function edit(Curso $curso){
+         return view('cursos.edit', compact('curso'));
+    }
+
+    public function update(Curso $curso){
+        return $curso;
     }
 }
